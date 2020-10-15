@@ -1,0 +1,75 @@
+<div class="container">  
+  <form [formGroup]="CartaoForm" (ngSubmit)="this[EventValue]()">  
+      <h3>Cartão - Pagamentos</h3>  
+      <div class="row">  
+      <table class="table">  
+      <tr>  
+        <td>Nome do Titular</td>  
+        <td>  
+          <input type="hidden" formControlName="PagamentoId">  
+          <input type="text" formControlName="NomeTitular">  
+          <div *ngIf="submitted && CartaoForm.controls.NomeTitular.errors" class="text-danger">  
+            <div *ngIf="CartaoForm.controls.NomeTitular.errors.required">O nome é obrigatório</div>  
+          </div>   
+        </td>  
+      </tr>  
+      <tr>  
+        <td>Número do Cartão</td>  
+        <td><input type="text" formControlName="NumeroCartao">  
+          <div *ngIf="submitted && CartaoForm.controls.NumeroCartao.errors" class="text-danger">  
+            <div *ngIf="CartaoForm.controls.NumeroCartao.errors.required">O número do cartão é obrigatório</div>  
+          </div>   
+        </td>  
+      </tr>  
+      <tr>  
+        <td>Data de Expiração</td>  
+        <td>  
+          <input type="text" formControlName="DataExpiracao">  
+          <div *ngIf="submitted && CartaoForm.controls.DataExpiracao.errors" class="text-danger">  
+            <div *ngIf="CartaoForm.controls.DataExpiracao.errors.required">Informe a data de expiração</div>  
+          </div>  
+        </td>  
+      </tr>  
+      <tr>  
+        <td>CVV</td>  
+        <td>  
+          <input type="text" formControlName="CVV">  
+          <div *ngIf="submitted && CartaoForm.controls.CVV.errors" class="text-danger">  
+            <div *ngIf="CartaoForm.controls.CVV.errors.required">O CVV é obrigatório</div>  
+          </div>  
+        </td>  
+      </tr>  
+      <tr>  
+        <td colspan="2">  
+          <button type="submit" class="btn btn-primary">{{EventValue}}</button>  
+        </td>
+        <td>
+          <button *ngIf="this.exibirBotaoCancelar" (click)="resetFrom()" type="button" class="btn btn-primary">Cancelar</button>  
+        </td>  
+      </tr>  
+    </table>  
+    </div>  
+   <div class="row">  
+    <table class="table table-striped">  
+      <tr>  
+        <td>ID</td>  
+        <td>Nome</td>  
+        <td>No. Cartão</td>  
+        <td>Data Expiração</td>  
+        <td>CVV</td>  
+        <td>Edita</td>  
+        <td>Deleta</td>  
+      </tr>  
+      <tr *ngFor="let d of data">  
+        <td>{{d.pagamentoId}}</td>  
+        <td>{{d.nomeTitular}}</td>  
+        <td>{{d.numeroCartao}}</td>  
+        <td>{{d.dataExpiracao}}</td>  
+        <td>{{d.cvv}}</td>  
+        <td><a (click)="editData(d)" class="btn btn-warning">Editar</a></td>  
+        <td><a (click)="deleteData(d.pagamentoId)" class="btn btn-danger">Deletar</a></td>    
+      </tr>  
+    </table>  
+  </div>  
+ </form>      
+</div> 
